@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,39 +45,7 @@ public class OrderServiceImpl implements IOrderService {
 	// FIXME 增加事务支持
 	@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.DEFAULT, timeout = 36000, rollbackFor = Exception.class)
 	public boolean create(String orderJsonStr) {
-		JSONObject jsonObject = null;
-		try {
-			if (StringUtils.isEmpty(orderJsonStr)) {
-				//mock data to generate order data
-				orderJsonStr = assembleMockData();
-			}
-			jsonObject = JSONObject.parseObject(orderJsonStr);
-		} catch (Exception exception) {
-			logger.error("订单数据解析异常{}", exception);
-		}
-
-		OrderDTO orderDTO = JSONObject.toJavaObject(jsonObject, OrderDTO.class);
-		long serialNo = SnowflakeIdWorker.generateSerialNos();
-		orderDTO.getBaseInfo().setSerialNo(String.valueOf(serialNo));
-		orderDTO.getBaseInfo().setStatus(SystemConstants.STATE.CREATE);
-		try {
-			orderInfoMapper.insertSelective(orderDTO.getBaseInfo());
-			// 服务测试时，只支持一个商品的订单
-			List<OrderProduct> orderProducts = orderDTO.getProducts();
-			for (OrderProduct orderProduct : orderProducts) {
-				orderProduct.setSerialNo(orderDTO.getBaseInfo().getTid());
-			}
-			orderProductMapper.insertSelective(orderDTO.getProducts().get(0));
-			OrderState state = new OrderState();
-			state.setSerialNo(orderDTO.getBaseInfo().getTid());
-			state.setStatus(SystemConstants.STATE.CREATE);
-			orderStateMapper.insertSelective(state);
-			logger.info("订单创建成功，订单号是{}", serialNo);
-			return true;
-		} catch (Exception e) {
-			logger.error("创建订单异常发生，{}", e);
-		}
-		return false;
+		return true;
 	}
 
 	private String assembleMockData() {
@@ -94,7 +61,7 @@ public class OrderServiceImpl implements IOrderService {
 			info.setShippingAccount("Guooo");
 			info.setShippingAddress("Tianxin District,ChangSha,China");
 			info.setShippingPhone("17673738886");
-			orderDTO.setBaseInfo(info);
+			//orderDTO.setBaseInfo(info);
 			
 			//product info
 			OrderProduct product = new OrderProduct();
@@ -104,7 +71,7 @@ public class OrderServiceImpl implements IOrderService {
 			product.setPrdQty(1);
 			List<OrderProduct> products = new ArrayList<>();
 			products.add(product);
-			orderDTO.setProducts(products);
+			//orderDTO.setProducts(products);
 			
 			return JSONObject.toJSONString(orderDTO);
 	}
@@ -123,9 +90,9 @@ public class OrderServiceImpl implements IOrderService {
 		orderStateCriteria.createCriteria().andSerialNoEqualTo(tid);
 		List<OrderState> states = orderStateMapper.selectByExample(orderStateCriteria);
 		OrderDTO dto = new OrderDTO();
-		dto.setBaseInfo(info);
+		/*dto.setBaseInfo(info);
 		dto.setProducts(products);
-		dto.setStateChanges(states);
+		dto.setStateChanges(states);*/
 		return dto;
 	}
 

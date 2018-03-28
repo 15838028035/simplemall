@@ -1,4 +1,4 @@
-# QuickStart
+﻿# QuickStart
 基于SpringCloud体系实现，简单购物流程实现，满足基本功能：注册、登录、商品列表展示、商品详情展示、订单创建、详情查看、订单支付、库存更新等等。
 
 每个业务服务采用独立的MYSQL数据库，初期考虑用到如下组件：
@@ -30,6 +30,7 @@
 | payment-service    |    8082    |  支付服务，支付记录  |
 | order-service        |    8083    |  订单服务，提供订单创建、详情、状态变更  |
 | msg-service        |    8084    |  消息处理服务  |
+| microservice-provider-weixin        |    8085    |  微信服务  |
 | front-app        |    8088    |  前端服务，结合swagger2提供API管理(有小问题，swagger页面无法点击单个接口，可通过展开功能打开，待解决)  |
 
 

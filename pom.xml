@@ -20,6 +20,7 @@
 		<module>payment-service</module>
 		<module>msg-service</module>
 		<module>microservice-provider-weixin</module>
+		<module>microservice-consumer-weixin</module>
 		<module>front-app</module>
 		<module>common-module</module>
 	</modules>

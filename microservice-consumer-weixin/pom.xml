@@ -7,9 +7,9 @@
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 	<groupId>com.simplemall.micro.serv.msg</groupId>
-	<artifactId>microservice-consumer-weixin</artifactId>
-	<name>microservice-consumer-weixin</name>
-	<description>微信服务消费者</description>
+	<artifactId>microservice-provider-weixin</artifactId>
+	<name>microservice-provider-weixin</name>
+	<description>微信服务</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

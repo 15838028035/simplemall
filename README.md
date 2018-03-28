@@ -31,6 +31,7 @@
 | order-service        |    8083    |  订单服务，提供订单创建、详情、状态变更  |
 | msg-service        |    8084    |  消息处理服务  |
 | microservice-provider-weixin        |    8085    |  微信服务  |
+| microservice-consumer-weixin        |    8086    |  微信服务消费者  |
 | front-app        |    8088    |  前端服务，结合swagger2提供API管理(有小问题，swagger页面无法点击单个接口，可通过展开功能打开，待解决)  |
 
 
